@@ -1,0 +1,44 @@
+@keyframes glisten {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(50%);
+  }
+}
+
+.bg-splash-bg {
+  background-color: #fff; /* Set to the desired background color */
+}
+
+.bg-splash-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(0, 255, 0, 0.5)
+  );
+  animation: glisten 2s infinite;
+}
+
+.text-green-500 {
+  color: #25d366; /* WhatsApp green */
+}
+
+.bg-gray-200 {
+  background-color: #efefef;
+}
+
+.bg-green-500 {
+  background-color: #25d366;
+}
+
+.text-green-600 {
+  color: #128c7e; /* A darker shade of WhatsApp green */
+}
+
+.text-green-800 {
+  color: #075e54; /* Even darker shade of WhatsApp green */
+}
