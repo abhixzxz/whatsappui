@@ -1,170 +1,101 @@
-import { useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { FaWhatsapp, FaGoogle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import framer-motion components
+import ThreeScene from '../../animations/ThreeScene'; // Import the 3D scene
 
-const LoginForm = () => {
-  const navigate = useNavigate();
-
-  // Define the validation schema using Yup
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("E-mail is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-  });
-
-  // Initialize formik
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      console.log("Form data", values);
-      // Perform login logic here, then navigate to another page if successful
-    },
-  });
-
+const WhatsAppSignUp = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-      <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-        <h1 className="font-bold text-center text-2xl mb-5 uppercase text-blue-600">
-          Login
-        </h1>
-        <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-          <div className="px-5 py-7">
-            <form onSubmit={formik.handleSubmit}>
-              <div className="mb-5">
-                <label
-                  htmlFor="email"
-                  className="font-semibold text-sm text-gray-600 pb-1 block"
-                >
-                  E-mail
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                  className="border rounded-lg px-3 py-2 mt-1 text-sm w-full"
-                />
-                {formik.touched.email && formik.errors.email ? (
-                  <div className="text-red-500 text-sm mt-1">
-                    {formik.errors.email}
-                  </div>
-                ) : null}
-              </div>
+    <div className="flex w-screen flex-wrap text-slate-800">
+      {/* 3D Scene as the left half of the screen */}
+      <div className="relative hidden h- select-none md:flex md:w-1/2">
+        <ThreeScene  />
+      </div>
 
-              <div className="mb-5">
-                <label
-                  htmlFor="password"
-                  className="font-semibold text-sm text-gray-600 pb-1 block"
-                >
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.password}
-                  className="border rounded-lg px-3 py-2 mt-1 text-sm w-full"
-                />
-                {formik.touched.password && formik.errors.password ? (
-                  <div className="text-red-500 text-sm mt-1">
-                    {formik.errors.password}
-                  </div>
-                ) : null}
-              </div>
-
-              <button
-                type="submit"
-                disabled={formik.isSubmitting}
-                className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-              >
-                <span className="inline-block mr-2">Login</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="w-4 h-4 inline-block"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </button>
-            </form>
-          </div>
-
-          <div className="py-5">
-            <div className="grid grid-cols-2 gap-1">
-              <div className="text-center sm:text-left whitespace-nowrap">
-                <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-4 h-4 inline-block align-text-top"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <span className="inline-block ml-1">Forgot Password</span>
-                </button>
-              </div>
-              <div className="text-center sm:text-right whitespace-nowrap">
-                <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-4 h-4 inline-block align-text-bottom"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
-                  <span className="inline-block ml-1">Help</span>
-                </button>
-              </div>
+      <motion.div 
+        className="flex w-full flex-col md:w-1/2"
+        initial={{ x: 100 }} 
+        animate={{ x: 0 }} 
+        transition={{ duration: 0.5 }} // Slide-in effect
+      >
+        <div className="flex justify-center pt-12 md:justify-start md:pl-12">
+          <a href="#" className="text-2xl font-bold text-green-600">
+            WhatsApp Clone
+          </a>
+        </div>
+        <div className="my-auto mx-auto flex flex-col justify-center px-6 pt-8 md:justify-start lg:w-[28rem]">
+          <p className="text-center text-3xl font-bold md:text-left md:leading-tight">Create your free account</p>
+          <p className="mt-6 text-center font-medium md:text-left">
+            Already using WhatsApp Clone?{' '}
+            <Link to="/register" className="whitespace-nowrap font-semibold text-green-700">
+              Login here
+            </Link>
+          </p>
+          <button className="mt-8 flex items-center justify-center rounded-md border px-4 py-2 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-green-700 hover:text-white focus:ring-2">
+            <FaGoogle className="mr-2 h-5 w-5" />
+            Get started with Google
+          </button>
+          <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
+            <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white px-4 text-center text-sm text-gray-500">
+              Or use email instead
             </div>
           </div>
-        </div>
-
-        <div className="text-center mt-5">
-          <p className="text-sm text-gray-600">
-            Not registered?{" "}
+          <form className="flex flex-col items-stretch pt-3 md:pt-8">
+            <div className="flex flex-col pt-4">
+              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-green-600">
+                <input
+                  type="text"
+                  id="login-name"
+                  className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                  placeholder="Username"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col pt-4">
+              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-green-600">
+                <input
+                  type="number"
+                  id="number"
+                  className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                  placeholder="Phone number"
+                />
+              </div>
+            </div>
+            <div className="mb-4 flex flex-col pt-4">
+              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-green-600">
+                <input
+                  type="password"
+                  id="login-password"
+                  className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                  placeholder="Password (minimum 8 characters)"
+                />
+              </div>
+            </div>
+            <div className="block">
+              <input
+                className="mr-2 h-5 w-5 appearance-none rounded border border-gray-300 bg-contain bg-no-repeat align-top text-black shadow checked:bg-green-600 focus:border-green-600 focus:shadow"
+                type="checkbox"
+                id="remember-me"
+                defaultChecked
+              />
+              <label className="inline-block" htmlFor="remember-me">
+                I agree to the <a className="underline" href="#">
+                  Terms and Conditions
+                </a>
+              </label>
+            </div>
             <button
-              onClick={() => navigate("/register")}
-              className="text-blue-500 hover:text-blue-700 font-semibold"
+              type="submit"
+              className="mt-6 flex items-center justify-center rounded-lg bg-green-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-green-500 ring-offset-2 transition hover:bg-green-700 focus:ring-2"
             >
-              Sign up here
+              <FaWhatsapp className="mr-2" />
+              Sign in
             </button>
-          </p>
+          </form>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
-export default LoginForm;
+export default WhatsAppSignUp;
